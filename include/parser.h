@@ -1,7 +1,6 @@
-#include <bits/stdc++.h>
-#include <cctype>
-#include <iomanip>
-#include <variant>
+#pragma once
+
+#include <exception>
 
 #include <tokenizer.h>
 
@@ -16,7 +15,7 @@ class Parser {
 public:
     Parser(Tokenizer* tokenizer) : tok_(tokenizer) {
         if (tok_ == nullptr) {
-            throw std::invalid_argument("Parser cannot be constructed from nullptr!");
+            throw std::invalid_argument("Parser cannot be constructed from nullptr");
         }
     }
 
@@ -26,7 +25,7 @@ public:
         }
         auto result = Expr();
         if (!tok_->Eof()) {
-            throw std::invalid_argument("Expected end of stream");
+            throw std::runtime_error("Expected end of stream");
         }
         return result;
     }

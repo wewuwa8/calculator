@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
+#pragma once
+
+#include <istream>
+#include <exception>
 #include <cctype>
-#include <iomanip>
-#include <variant>
 
 enum class TokenType {
     kEof = '\0',
@@ -19,7 +20,7 @@ class Tokenizer {
 public:
     Tokenizer(std::istream* in) : in_(in) {
         if (in_ == nullptr) {
-            throw std::invalid_argument("Tokenizer cannot be constructed from nullptr!");
+            throw std::invalid_argument("Tokenizer cannot be constructed from nullptr");
         }
         Next();
     }
@@ -49,7 +50,7 @@ public:
                 in_->get();
                 double denom = 0.1;
                 if (!isdigit(in_->peek())) {
-                    throw std::runtime_error("Unexpected non digit in floating number");
+                    throw std::runtime_error("Expected digit after point in floating number");
                 }
                 while (in_->peek() != EOF && isdigit(in_->peek())) {
                     fraction_part += denom * (in_->get() - '0');

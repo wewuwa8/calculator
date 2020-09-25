@@ -37,7 +37,7 @@ TEST_CASE("Empty", "[parser][simple]") {
 }
 
 TEST_CASE("Parser nullptr", "[parser][invalid]") {
-    REQUIRE_THROWS(Parser{nullptr});
+    REQUIRE_THROWS_AS(Parser{nullptr}, std::invalid_argument);
 }
 
 TEST_CASE("Invalid syntax", "[parser][invalid]") {
@@ -61,5 +61,5 @@ TEST_CASE("Invalid syntax", "[parser][invalid]") {
     std::stringstream ss{input};
     Tokenizer tokenizer{&ss};
     Parser parser(&tokenizer);
-    REQUIRE_THROWS(parser.Evaluate());
+    REQUIRE_THROWS_AS(parser.Evaluate(), std::runtime_error);
 }
